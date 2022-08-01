@@ -1,0 +1,66 @@
+<section class="container">
+    <div class="division">
+        <div class="left">
+            <div class="mt20">
+                <label for="file">Choose a file</label>
+                <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload>
+            </div>
+            <div class="image" *ngIf="fileDetail.type === 'image'">
+                <button class="leftBtn" (click)="rotateLeft()">Rotate Left</button>
+                <button class="rightBtn">Rotate Right</button>
+                <img [src]="this.fileDetail.url" alt="" width="100%" #inputElement>
+                <div class="zoomBtns">
+                    <button class="" (click)="zoomIn()">+</button>
+                    <button class="" (click)="zoomOut()">-</button>
+                </div>
+            </div>
+            <iframe class="mt20" *ngIf="fileDetail.type === 'pdf'"
+                src="https://firebasestorage.googleapis.com/v0/b/expensify-ab7b4.appspot.com/o/images%2F1659363969522beginning-angularjs.pdf?alt=media&token=d2c8dabc-01b6-4fbe-9487-ef5a959839d6"
+                style="position: absolute; height: 90%; border: none;width: 50%;"></iframe>
+        </div>
+        <div>
+            <div class="mt20">
+                <label for="cars">Type</label>
+                <select name="type" id="type" [(ngModel)]="payload.type" (change)="onChangeType($event)">
+                    <option value="amount">Amount</option>
+                    <option value="date">Date</option>
+                </select>
+            </div>
+            <div class="mt20" *ngIf="payload.type === 'amount'">
+                <label for="cars">Currency</label>
+                <select name="currency" id="currency" (change)="onChangeCurrency($event)">
+                    <option value="amount" *ngFor="let currency of currencyList" value="{{currency.cc}}">
+                        {{currency.cc}}
+                    </option>
+                </select>
+            </div>
+            <div class="mt20" *ngIf="payload.type === 'amount'">
+                <label for="amount">Amount</label>
+                <input currencyMask [(ngModel)]="payload.amount" [options]="{thousands: ',', decimal: '.' }" />
+            </div>
+            <div class="mt20" *ngIf="payload.type === 'date'">
+                <label>Date</label>
+                <div class="date">
+                    <div>
+                        <label>mm</label>
+                        <input type="text" placeholder="mm" (keypress)="keyPress($event)" type="number" pattern="[0-9]*"
+                            [(ngModel)]="month">
+                    </div>
+                    <div>
+                        <label>dd</label>
+                        <input type="text" placeholder="dd" (keypress)="keyPress($event)" type="number" pattern="[0-9]*"
+                            [(ngModel)]="date">
+                    </div>
+                    <div>
+                        <label>yyyy</label>
+                        <input type="text" placeholder="yyyy" (keypress)="keyPress($event)" type="number"
+                            pattern="[0-9]*" [(ngModel)]="year">
+                    </div>
+                </div>
+            </div>
+            <div class="mt20">
+                <button (click)="submitForm()">Submit</button>
+            </div>
+        </div>
+    </div>
+</section>

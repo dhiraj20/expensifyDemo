@@ -1,0 +1,64 @@
+.outerContainer {
+    display: flex;
+    height: 100vh;
+    .sideNav {
+        width: 100px;
+        height: 100%;
+        background-color: blue;
+    }
+    .innerContainer {
+        width: calc(100% - 100px);
+    }
+    .header {
+        height: 60px;
+        border-bottom: 1px solid #b4b4b4;
+    }
+    .container {
+        display: flex;
+        height: calc(100% - 60px);
+        &_image {
+            width: 60%;
+            height: 75%;
+            position: relative;
+            overflow: auto;
+            img {
+                width: 100%;
+                // max-height: 80vh;
+            }
+            .left {
+                position: fixed;
+                left: 125px;
+                top: 75px;
+                z-index: 5;
+            }
+            .right {
+                position: fixed;
+                left: 56%;
+                top: 75px;
+                z-index: 5;
+            }
+            .zoomBtns {
+                position: fixed;
+                bottom: 50px;
+                left: 28%;
+                display: flex;
+                gap: 10px;
+            }
+        }
+        &_right {
+            width: 40%;
+            .amount {
+                display: flex;
+                // justify-content: center;
+                // height: 100%;
+                // width: 100%;
+                gap: 20px;
+                // position: relative;
+                // top: 25%;
+                label {
+                    display: block;
+                }
+            }
+        }
+    }
+}

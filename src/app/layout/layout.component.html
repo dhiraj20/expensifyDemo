@@ -1,0 +1,41 @@
+<div class="outerContainer">
+    <div class="sideNav">sidenav</div>
+    <div class="innerContainer">
+        <div class="header">Header</div>
+        <div class="container">
+            <div class="container_image">
+                <button class="left" (click)="rotateLeft()">Rotate Left</button>
+                <button class="right" (click)="rotateRight()">Rotate Right</button>
+                <div class="">
+                    <img #inputElement src="../../assets/Screenshot 2021-03-09 at 9.16.43 PM.png">
+                    <div class="zoomBtns">
+                        <button class="" (click)="zoomIn()">+</button>
+                        <button class="" (click)="zoomOut()">-</button>
+                    </div>
+                </div>
+            </div>
+            <div class="container_right">
+                <div class="amount">
+                    <div>
+                        <label>Amount</label>
+                        <input currencyMask [options]="{thousands: ',', decimal: '.' }" />
+                    </div>
+                    <div>
+                        <label>Currency</label>
+                        <input type="number">
+                        <p>If unclear, use USD $</p>
+                    </div>
+                </div>
+                <div>
+                    <input type="checkbox"><label>Amount is unclear</label>
+                </div>
+                <div>
+                    <input type="checkbox"><label>Amount is negative</label>
+                </div>
+                <div>
+                    <button>Next</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
