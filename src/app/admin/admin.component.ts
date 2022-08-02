@@ -7,7 +7,8 @@ import {
 } from '@angular/core';
 import { AppService } from '../app.service';
 import { CURRENCY_LIST } from '../currency';
-import { getDownloadURL } from 'firebase/storage';
+import { deleteObject, getDownloadURL, getStorage, ref } from 'firebase/storage';
+import { getDocs } from 'firebase/firestore';
 
 @Component({
   selector: 'app-admin',
@@ -28,12 +29,15 @@ export class AdminComponent implements OnInit {
     amount: '',
     currency: this.currencyList[0].cc,
     date: '',
+    url: '',
   };
   fileDetail: any = {
     type: '',
     url: '',
   };
   imageFormats = ['jpg', 'jpeg', 'png', 'gif'];
+  uploadedFileName = '';
+  billsArray: any = [];
 
   constructor(private appService: AppService, private renderer: Renderer2) {}
 
@@ -49,10 +53,15 @@ export class AdminComponent implements OnInit {
     }
   }
 
-  getItems() {
-    this.appService.getItems().subscribe(res => {
-      console.log(res);
+  async getItems() {
+    const q = this.appService.getItems();
+    const querySnapshot = await getDocs(q);
+    const dataArray = querySnapshot.forEach(doc => {
+      // doc.data() is never undefined for query doc snapshots
+      this.billsArray.push(doc.data())
     });
+      console.log(this.billsArray);
+
   }
 
   onChangeType(event: any) {
@@ -80,12 +89,14 @@ export class AdminComponent implements OnInit {
       .then(snapshot => {
         console.log('Uploaded', snapshot.totalBytes, 'bytes.');
         console.log('File metadata:', snapshot.metadata);
+        this.uploadedFileName = snapshot.metadata.fullPath;
         let type: any = snapshot.metadata?.contentType?.split('/')[1];
         this.fileDetail.type =
           this.imageFormats.indexOf(type) >= 0 ? 'image' : 'pdf';
         getDownloadURL(snapshot.ref).then(url => {
           console.log('File available at', url);
           this.fileDetail.url = url;
+          this.payload.url = url;
         });
         console.log(this.payload);
       })
@@ -116,7 +127,26 @@ export class AdminComponent implements OnInit {
     }
   }
 
-  submitForm() {
-    console.log(this.payload);
+  async submitForm() {
+    if (this.payload.type === 'date') {
+      this.payload.date = this.month + '/' + this.date + '/' + this.year;
+    } else {
+      this.payload.date = '';
+    }
+    try {
+      const docRef = await this.appService.saveData(this.payload);
+      console.log('Document written with ID: ', docRef.id);
+    } catch(error) {
+      console.log('An error occured.', error);
+      const storage = getStorage();
+      const desertRef = ref(storage, this.uploadedFileName);
+      deleteObject(desertRef)
+        .then(() => {
+          console.log("File deleted successfully");
+        })
+        .catch(error => {
+            console.log('Uh-oh, an error occurred!', error);
+        });
+    }
   }
 }

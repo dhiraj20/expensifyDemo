@@ -16,22 +16,22 @@
     .container {
         display: flex;
         height: calc(100% - 60px);
-        &_image {
+        &_left {
             width: 60%;
-            height: 75%;
+            // height: 75%;
             position: relative;
             overflow: auto;
-            img {
-                width: 100%;
-                // max-height: 80vh;
-            }
-            .left {
+            // img {
+            //     width: 100%;
+            //     // max-height: 80vh;
+            // }
+            .lbtn {
                 position: fixed;
                 left: 125px;
                 top: 75px;
                 z-index: 5;
             }
-            .right {
+            .rbtn {
                 position: fixed;
                 left: 56%;
                 top: 75px;

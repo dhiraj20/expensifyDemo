@@ -11,13 +11,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { environment } from 'src/environments/environment';
+import { SafePipe } from './safe.pipe';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LayoutComponent,
-    AdminComponent
+    AdminComponent,
+    SafePipe
   ],
   imports: [
     BrowserModule,

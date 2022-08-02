@@ -14,8 +14,7 @@
                     <button class="" (click)="zoomOut()">-</button>
                 </div>
             </div>
-            <iframe class="mt20" *ngIf="fileDetail.type === 'pdf'"
-                src="https://firebasestorage.googleapis.com/v0/b/expensify-ab7b4.appspot.com/o/images%2F1659363969522beginning-angularjs.pdf?alt=media&token=d2c8dabc-01b6-4fbe-9487-ef5a959839d6"
+            <iframe class="mt20" *ngIf="fileDetail.type === 'pdf'" [src]="this.fileDetail.url | safe"
                 style="position: absolute; height: 90%; border: none;width: 50%;"></iframe>
         </div>
         <div>

@@ -1,18 +1,25 @@
-<div class="outerContainer">
+<div class="outerContainer" *ngIf="currentObject">
     <div class="sideNav">sidenav</div>
     <div class="innerContainer">
         <div class="header">Header</div>
         <div class="container">
-            <div class="container_image">
-                <button class="left" (click)="rotateLeft()">Rotate Left</button>
+            <div class="container_left">
+                <!-- <button class="left" (click)="rotateLeft()">Rotate Left</button>
                 <button class="right" (click)="rotateRight()">Rotate Right</button>
-                <div class="">
-                    <img #inputElement src="../../assets/Screenshot 2021-03-09 at 9.16.43 PM.png">
+                <div  style='height: 100px; width: 300px; background-color: green'>
+                    <img #inputElement [src]="currentObject.url" style='height: 100%; width: 100%; object-fit: contain'>
                     <div class="zoomBtns">
                         <button class="" (click)="zoomIn()">+</button>
                         <button class="" (click)="zoomOut()">-</button>
                     </div>
-                </div>
+                </div> -->
+                            <div style='height: 100%; background-color: green'>
+                                <button class="lbtn" (click)="rotateLeft()">Rotate Left</button>
+                                <button class="rbtn" (click)="rotateRight()">Rotate Right</button>
+                                <img #inputElement style='height: 100%; width: 100%; object-fit: contain'
+                                    [src]='currentObject.url' />
+                            
+                            </div>
             </div>
             <div class="container_right">
                 <div class="amount">
