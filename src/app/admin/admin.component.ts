@@ -30,6 +30,7 @@ export class AdminComponent implements OnInit {
     currency: this.currencyList[0].cc,
     date: '',
     url: '',
+    fileType: ''
   };
   fileDetail: any = {
     type: '',
@@ -93,6 +94,7 @@ export class AdminComponent implements OnInit {
         let type: any = snapshot.metadata?.contentType?.split('/')[1];
         this.fileDetail.type =
           this.imageFormats.indexOf(type) >= 0 ? 'image' : 'pdf';
+        this.payload.fileType = this.fileDetail.type;
         getDownloadURL(snapshot.ref).then(url => {
           console.log('File available at', url);
           this.fileDetail.url = url;

@@ -5,11 +5,10 @@
         gap: 20px;
     }
     .image {
-        width: 95%;
-        height: 850px;
-        background: gray;
-        overflow: auto;
-        position: relative;
+        height: 100%;
+        width: 100%;
+        object-fit: contain;
+        padding: 20px;
         .leftBtn {
             position: fixed;
             top: 90px;

@@ -4,7 +4,9 @@ import { Firestore, collectionData, collection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
 import { getStorage, ref, uploadBytesResumable } from 'firebase/storage';
-import { addDoc, limit, query } from 'firebase/firestore';
+import { addDoc, getDocs, limit, orderBy, query, startAfter, startAt } from 'firebase/firestore';
+
+import { getDatabase } from 'firebase/database';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +18,7 @@ export class AppService {
 
   getItems() {
     const c = collection(this.firestore, 'bills');
-    const q = query(c, limit(2));
+    const q = query(c, orderBy('createdAt'));
     return q;
   }
 
@@ -32,6 +34,8 @@ export class AppService {
   saveData(data: any) {
     let payload: any = {};
     payload.url = data.url;
+    payload.fileType = data.fileType;
+    payload.createdAt = new Date().toUTCString();
     if (data.type === 'date') {
       payload.date = data.date;
       payload.type = data.type;
@@ -43,31 +47,3 @@ export class AppService {
     return addDoc(collection(this.firestore, 'bills'), payload);
   }
 }
-
-
-
-// import {
-//   collection,
-//   query,
-//   orderBy,
-//   startAfter,
-//   limit,
-//   getDocs,
-// } from 'firebase/firestore';
-
-// // Query the first page of docs
-// const first = query(collection(db, 'cities'), orderBy('population'), limit(25));
-// const documentSnapshots = await getDocs(first);
-
-// // Get the last visible document
-// const lastVisible = documentSnapshots.docs[documentSnapshots.docs.length - 1];
-// console.log('last', lastVisible);
-
-// // Construct a new query starting at this document,
-// // get the next 25 cities.
-// const next = query(
-//   collection(db, 'cities'),
-//   orderBy('population'),
-//   startAfter(lastVisible),
-//   limit(25)
-// );
