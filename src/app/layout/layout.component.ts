@@ -12,7 +12,7 @@ export class LayoutComponent implements OnInit {
   current_rotation = 180;
   defaultWidth = 100;
   myDecimal = 0.0;
-  billsArray: any = [];
+  billsArrayList: any = [];
   currentObject: any = null;
   currencyList = CURRENCY_LIST;
   currency = '';
@@ -20,6 +20,9 @@ export class LayoutComponent implements OnInit {
   date = '';
   year = '';
   amount = '';
+  currentIndex = 0;
+  page = 0;
+  currentArray: any = [];
 
   constructor(private renderer: Renderer2, private appService: AppService) {}
 
@@ -31,10 +34,14 @@ export class LayoutComponent implements OnInit {
     const q = this.appService.getItems();
     const querySnapshot = await getDocs(q);
     const dataArray = querySnapshot.forEach(doc => {
-      this.billsArray.push({ id: doc.id, ...doc.data() });
+      this.billsArrayList.push({ id: doc.id, ...doc.data() });
     });
-    console.log(this.billsArray);
-    this.currentObject = this.billsArray[0];
+    console.log(this.billsArrayList);
+    this.currentObject = this.billsArrayList[this.currentIndex];
+    // this.currentArray = this.billsArrayList.slice(this.page * 4, 4);
+    // console.log(this.currentArray);
+    const x = this.billsArrayList.slice(0, 1);
+    console.log(x);
   }
 
   onChangeCurrency(event: any) {
@@ -71,6 +78,22 @@ export class LayoutComponent implements OnInit {
     if (this.defaultWidth > 100) {
       this.defaultWidth = this.defaultWidth - 5;
       this.renderer.setStyle(this.inputElement?.nativeElement, 'width', `${this.defaultWidth}%`);
+    }
+  }
+
+  validateData() {
+    if (this.currentObject.type === 'amount') {
+      if (
+        this.currentObject.amount === this.amount &&
+        this.currentObject.currency === this.currency
+      ) {
+        this.currentObject = this.billsArrayList[this.currentIndex++];
+      }
+    } else if (this.currentObject.type === 'date') {
+      const date = this.month + '/' + this.date + '/' + this.year;
+      if (this.currentObject.date === date) {
+        this.currentObject = this.billsArrayList[this.currentIndex++];
+      }
     }
   }
 }

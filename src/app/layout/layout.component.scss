@@ -37,13 +37,13 @@
             .lbtn {
                 position: fixed;
                 left: 145px;
-                top: 200px;
+                top: 165px;
                 z-index: 5;
             }
             .rbtn {
                 position: fixed;
                 left: 55%;
-                top: 200px;
+                top: 165px;
                 z-index: 5;
             }
             .zoomBtns {
@@ -56,12 +56,13 @@
         }
         &_right {
             width: 40%;
+            padding: 20px;
             .amount {
                 display: flex;
                 // justify-content: center;
                 // height: 100%;
                 // width: 100%;
-                gap: 20px;
+                gap: 40px;
                 // position: relative;
                 // top: 25%;
                 label {
@@ -74,4 +75,17 @@
             }
         }
     }
+}
+
+.btn {
+    width: 350px;
+        height: 30px;
+        border-radius: 5px;
+        background: #59e659;
+        border: 1px solid #59e659;
+        font-size: 16px;
+        cursor: pointer;
+        &:hover {
+            border: 1px solid #102210;
+        }
 }

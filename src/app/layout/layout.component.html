@@ -20,12 +20,14 @@
                     <div class="amount">
                         <div *ngIf="currentObject.type === 'amount'">
                             <label>Amount</label>
-                            <input currencyMask [(ngModel)]="amount" [options]="{thousands: ',', decimal: '.' }" />
+                            <input class="width_150" currencyMask [(ngModel)]="amount"
+                                [options]="{thousands: ',', decimal: '.' }" required />
                         </div>
                         <div *ngIf="currentObject.type === 'amount'">
                             <label>Currency</label>
-                            <select name="currency" id="currency" (change)="onChangeCurrency($event)">
-                                <option value="amount" *ngFor="let currency of currencyList" value="{{currency.cc}}">
+                            <select class="width_150" name="currency" id="currency" (change)="onChangeCurrency($event)"
+                                [(ngModel)]="currency">
+                                <option value="currency" *ngFor="let currency of currencyList" value="{{currency.cc}}">
                                     {{currency.cc}}
                                 </option>
                             </select>
@@ -52,17 +54,17 @@
                             </div>
                         </div>
                     </div>
-                    <div style="display: flex; gap: 10px" *ngIf="currentObject.type === 'amount'">
+                    <div class="mt10 info" *ngIf="currentObject.type === 'amount'">
                         <input type="checkbox"><label>Amount is unclear</label>
                     </div>
-                    <div style="display: flex; gap: 10px" *ngIf="currentObject.type === 'amount'">
+                    <div class="mt10 info" *ngIf="currentObject.type === 'amount'">
                         <input type="checkbox"><label>Amount is negative</label>
                     </div>
-                    <div style="display: flex; gap: 10px" *ngIf="currentObject.type === 'date'">
+                    <div class="mt10 info" *ngIf="currentObject.type === 'date'">
                         <input type="checkbox"><label>Date is unclear</label>
                     </div>
-                    <div>
-                        <button>Next</button>
+                    <div class="mt20">
+                        <button class="btn" (click)="validateData()">Next</button>
                     </div>
                 </div>
             </div>

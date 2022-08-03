@@ -2,6 +2,8 @@
 body, * {
     margin: 0;
     box-sizing: border-box;
+    font-size: 16px;
+    font-family: sans-serif;
 }
 
 label {
@@ -11,3 +13,17 @@ label {
 .mt20 {
     margin-top: 20px;
 }
+
+.mt10 {
+    margin-top: 10px;
+}
+
+.width_150 {
+    width: 150px;
+}
+
+.info {
+    display: flex;
+    gap: 10px
+}
+
