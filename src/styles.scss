@@ -23,7 +23,7 @@ label {
   width: 150px;
 }
 
-.info {
+.row {
   display: flex;
   gap: 10px;
   align-items: center;
@@ -43,4 +43,17 @@ select {
 .centerAlign {
   display: flex;
   align-items: center;
+}
+
+.btn {
+  width: 350px;
+  height: 30px;
+  border-radius: 5px;
+  background: #59e659;
+  border: 1px solid #59e659;
+  font-size: 16px;
+  cursor: pointer;
+  &:hover {
+    border: 1px solid #102210;
+  }
 }

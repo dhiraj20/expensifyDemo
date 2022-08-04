@@ -7,7 +7,12 @@ import {
 } from '@angular/core';
 import { AppService } from '../app.service';
 import { CURRENCY_LIST } from '../currency';
-import { deleteObject, getDownloadURL, getStorage, ref } from 'firebase/storage';
+import {
+  deleteObject,
+  getDownloadURL,
+  getStorage,
+  ref,
+} from 'firebase/storage';
 import { getDocs } from 'firebase/firestore';
 
 @Component({
@@ -30,7 +35,9 @@ export class AdminComponent implements OnInit {
     currency: this.currencyList[0].cc,
     date: '',
     url: '',
-    fileType: ''
+    fileType: '',
+    amountUnclear: false,
+    dateUnclear: false,
   };
   fileDetail: any = {
     type: '',
@@ -58,11 +65,10 @@ export class AdminComponent implements OnInit {
     const q = this.appService.getItems();
     const querySnapshot = await getDocs(q);
     const dataArray = querySnapshot.forEach(doc => {
-      // doc.data() is never undefined for query doc snapshots
-      this.billsArray.push(doc.data())
+      this.billsArray.push(doc.data());
     });
-      console.log(this.billsArray);
-
+    console.log(this.billsArray);
+    this.fileDetail.url = this.billsArray[2].url;
   }
 
   onChangeType(event: any) {
@@ -138,17 +144,32 @@ export class AdminComponent implements OnInit {
     try {
       const docRef = await this.appService.saveData(this.payload);
       console.log('Document written with ID: ', docRef.id);
-    } catch(error) {
+    } catch (error) {
       console.log('An error occured.', error);
       const storage = getStorage();
       const desertRef = ref(storage, this.uploadedFileName);
       deleteObject(desertRef)
         .then(() => {
-          console.log("File deleted successfully");
+          console.log('File deleted successfully');
         })
         .catch(error => {
-            console.log('Uh-oh, an error occurred!', error);
+          console.log('Uh-oh, an error occurred!', error);
         });
+    } finally {
+      this.payload = {
+        type: 'amount',
+        amount: '',
+        currency: this.currencyList[0].cc,
+        date: '',
+        url: '',
+        fileType: '',
+        amountUnclear: false,
+        dateUnclear: false,
+      };
+      this.fileDetail = {
+        type: '',
+        url: '',
+      };
     }
   }
 }

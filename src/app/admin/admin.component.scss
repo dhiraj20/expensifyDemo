@@ -1,23 +1,27 @@
 .container {
-  height: auto;
+  height: 100vh;
   .division {
     display: flex;
-    gap: 20px;
   }
   .image {
-    height: 100%;
-    width: 100%;
-    object-fit: contain;
     padding: 20px;
+    overflow: auto;
+    height: 100%;
+    background: gray;
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: contain;
+    }
     .leftBtn {
       position: fixed;
-      top: 90px;
+      top: 110px;
       left: 40px;
       z-index: 5;
     }
     .rightBtn {
       position: fixed;
-      top: 90px;
+      top: 110px;
       left: 50%;
       z-index: 5;
     }
@@ -30,9 +34,23 @@
   .left {
     width: 60%;
     position: relative;
+    overflow: auto;
+    height: 100vh;
+  }
+  .right {
+    padding: 20px;
+    height: 100vh;
+    width: 40%;
+    border-left: 1px solid #b4b4b4;
+    height: 100vh;
   }
   .date {
     display: flex;
     gap: 20px;
   }
+}
+
+.rowCurrency {
+  display: flex;
+  gap: 20px;
 }
