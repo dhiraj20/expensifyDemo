@@ -1,4 +1,10 @@
-import { Component, ElementRef, OnInit, ViewChild, Renderer2 } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+  Renderer2,
+} from '@angular/core';
 import { interval, Observable, Observer } from 'rxjs';
 import { getDocs } from 'firebase/firestore';
 import { AppService } from '../app.service';
@@ -13,7 +19,7 @@ const PROGRESS_COUNT = 25;
 export class LayoutComponent implements OnInit {
   @ViewChild('inputElement') inputElement: ElementRef;
   current_rotation = 180;
-  defaultWidth = 100;
+  defaultZoomValue = 1;
   myDecimal = 0.0;
   billsArrayList: any = [];
   currentObject: any = null;
@@ -87,16 +93,24 @@ export class LayoutComponent implements OnInit {
   rotateRight() {}
 
   zoomIn() {
-    if (this.defaultWidth < 200) {
-      this.defaultWidth = this.defaultWidth + 5;
-      this.renderer.setStyle(this.inputElement?.nativeElement, 'width', `${this.defaultWidth}%`);
+    if (this.defaultZoomValue < 2.5) {
+      this.defaultZoomValue = this.defaultZoomValue + 0.5;
+      this.renderer.setStyle(
+        this.inputElement?.nativeElement,
+        'transform',
+        `scale(${this.defaultZoomValue})`
+      );
     }
   }
 
   zoomOut() {
-    if (this.defaultWidth > 100) {
-      this.defaultWidth = this.defaultWidth - 5;
-      this.renderer.setStyle(this.inputElement?.nativeElement, 'width', `${this.defaultWidth}%`);
+    if (this.defaultZoomValue > 1) {
+      this.defaultZoomValue = this.defaultZoomValue - 0.5;
+      this.renderer.setStyle(
+        this.inputElement?.nativeElement,
+        'transform',
+        `scale(${this.defaultZoomValue})`
+      );
     }
   }
 

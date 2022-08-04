@@ -1,44 +1,46 @@
 /* You can add global styles to this file, and also import other style files */
-body, * {
-    margin: 0;
-    box-sizing: border-box;
-    font-size: 16px;
-    font-family: sans-serif;
+body,
+* {
+  margin: 0;
+  box-sizing: border-box;
+  font-size: 16px;
+  font-family: sans-serif;
 }
 
 label {
-    display: block;
+  display: block;
 }
 
 .mt20 {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 .mt10 {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 .width_150 {
-    width: 150px;
+  width: 150px;
 }
 
 .info {
-    display: flex;
-    gap: 10px;
-    align-items: center;
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 
 .error {
-    border: 1px solid red;
+  border: 1px solid red;
 }
 
-input, select {
-    height: 30px;
-    border: 1px solid #ced4da;
-    border-radius: 5px;
+input,
+select {
+  height: 30px;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
 }
 
 .centerAlign {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }

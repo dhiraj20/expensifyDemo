@@ -1,38 +1,38 @@
 .container {
-    height: auto;
-    .division {
-        display: flex;
-        gap: 20px;
+  height: auto;
+  .division {
+    display: flex;
+    gap: 20px;
+  }
+  .image {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+    padding: 20px;
+    .leftBtn {
+      position: fixed;
+      top: 90px;
+      left: 40px;
+      z-index: 5;
     }
-    .image {
-        height: 100%;
-        width: 100%;
-        object-fit: contain;
-        padding: 20px;
-        .leftBtn {
-            position: fixed;
-            top: 90px;
-            left: 40px;
-            z-index: 5;
-        }
-        .rightBtn {
-            position: fixed;
-            top: 90px;
-            left: 50%;
-            z-index: 5;
-        }
-        .zoomBtns {
-            position: fixed;
-            bottom: 5%;
-            left: 30%;
-        }
+    .rightBtn {
+      position: fixed;
+      top: 90px;
+      left: 50%;
+      z-index: 5;
     }
-    .left {
-        width: 60%;
-        position: relative;
+    .zoomBtns {
+      position: fixed;
+      bottom: 5%;
+      left: 30%;
     }
-    .date {
-        display: flex;
-        gap: 20px;
-    }
+  }
+  .left {
+    width: 60%;
+    position: relative;
+  }
+  .date {
+    display: flex;
+    gap: 20px;
+  }
 }
