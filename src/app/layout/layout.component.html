@@ -1,11 +1,14 @@
 <div class="outerContainer" *ngIf="currentObject">
-    <div class="sideNav">sidenav</div>
+    <div class="sideNav">
+        <span>E</span>
+    </div>
     <div class="innerContainer">
         <div class="header">
-            Header
+            <span>{{time | async}}</span>
         </div>
         <div>
-            <div class="progress"><progress id="file" value="32" max="100"> 32% </progress></div>
+            <div class="progress"><progress id="progress" [value]="progressValue" max="100">
+                </progress><span>{{taskIndex}}/{{taskGroup}}</span></div>
             <div class="container">
                 <div class="container_left">
                     <div style='height: 100%; background-color: gray' *ngIf="currentObject.fileType === 'image'">
@@ -17,55 +20,63 @@
                         style="position: absolute; height: 100%; border: none;width: 95%;"></iframe>
                 </div>
                 <div class="container_right">
-                    <div class="amount">
-                        <div *ngIf="currentObject.type === 'amount'">
-                            <label>Amount</label>
-                            <input class="width_150" currencyMask [(ngModel)]="amount"
-                                [options]="{thousands: ',', decimal: '.' }" required />
-                        </div>
-                        <div *ngIf="currentObject.type === 'amount'">
-                            <label>Currency</label>
-                            <select class="width_150" name="currency" id="currency" (change)="onChangeCurrency($event)"
-                                [(ngModel)]="currency">
-                                <option value="currency" *ngFor="let currency of currencyList" value="{{currency.cc}}">
-                                    {{currency.cc}}
-                                </option>
-                            </select>
-                            <p>If unclear, use USD $</p>
-                        </div>
-                    </div>
-                    <div class="mt20" *ngIf="currentObject.type === 'date'">
-                        <label>Date</label>
-                        <div class="date">
-                            <div>
-                                <label>mm</label>
-                                <input type="text" placeholder="mm" (keypress)="keyPress($event)" type="number"
-                                    pattern="[0-9]*" [(ngModel)]="month">
+                    <form #layoutForm="ngForm">
+                        <div class="amount">
+                            <div *ngIf="currentObject.type === 'amount'">
+                                <label>Amount</label>
+                                <input class="width_150" currencyMask [(ngModel)]="amount"
+                                    [options]="{thousands: ',', decimal: '.' }" required name="amount"
+                                    [ngClass]="formError.amount ? 'error': ''" />
                             </div>
-                            <div>
-                                <label>dd</label>
-                                <input type="text" placeholder="dd" (keypress)="keyPress($event)" type="number"
-                                    pattern="[0-9]*" [(ngModel)]="date">
-                            </div>
-                            <div>
-                                <label>yyyy</label>
-                                <input type="text" placeholder="yyyy" (keypress)="keyPress($event)" type="number"
-                                    pattern="[0-9]*" [(ngModel)]="year">
+                            <div *ngIf="currentObject.type === 'amount'">
+                                <label>Currency</label>
+                                <select class="width_150" name="currency" id="currency"
+                                    [ngClass]="formError.currency ? 'error': ''" (change)="onChangeCurrency($event)"
+                                    [(ngModel)]="currency">
+                                    <option value="currency" *ngFor="let currency of currencyList"
+                                        value="{{currency.cc}}">
+                                        {{currency.cc}}
+                                    </option>
+                                </select>
+                                <p>If unclear, use USD $</p>
                             </div>
                         </div>
-                    </div>
-                    <div class="mt10 info" *ngIf="currentObject.type === 'amount'">
-                        <input type="checkbox"><label>Amount is unclear</label>
-                    </div>
-                    <div class="mt10 info" *ngIf="currentObject.type === 'amount'">
-                        <input type="checkbox"><label>Amount is negative</label>
-                    </div>
-                    <div class="mt10 info" *ngIf="currentObject.type === 'date'">
-                        <input type="checkbox"><label>Date is unclear</label>
-                    </div>
-                    <div class="mt20">
-                        <button class="btn" (click)="validateData()">Next</button>
-                    </div>
+                        <div class="mt20" *ngIf="currentObject.type === 'date'">
+                            <label>Date</label>
+                            <div class="date">
+                                <div>
+                                    <label>mm</label>
+                                    <input type="text" placeholder="mm" (keypress)="keyPress($event)" type="number"
+                                        pattern="[0-9]*" [(ngModel)]="month" [ngClass]="formError.month ? 'error': ''"
+                                        name="month">
+                                </div>
+                                <div>
+                                    <label>dd</label>
+                                    <input type="text" placeholder="dd" (keypress)="keyPress($event)" type="number"
+                                        pattern="[0-9]*" [(ngModel)]="date" [ngClass]="formError.day ? 'error': ''"
+                                        name="day">
+                                </div>
+                                <div>
+                                    <label>yyyy</label>
+                                    <input type="text" placeholder="yyyy" (keypress)="keyPress($event)" type="number"
+                                        pattern="[0-9]*" [(ngModel)]="year" [ngClass]="formError.year ? 'error': ''"
+                                        name="year">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt10 info" *ngIf="currentObject.type === 'amount'">
+                            <input type="checkbox"><label>Amount is unclear</label>
+                        </div>
+                        <div class="mt10 info" *ngIf="currentObject.type === 'amount'">
+                            <input type="checkbox"><label>Amount is negative</label>
+                        </div>
+                        <div class="mt10 info" *ngIf="currentObject.type === 'date'">
+                            <input type="checkbox"><label>Date is unclear</label>
+                        </div>
+                        <div class="mt20">
+                            <button class="btn" (click)="validateData()">Next</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

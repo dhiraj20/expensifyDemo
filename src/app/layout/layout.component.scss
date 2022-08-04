@@ -3,6 +3,13 @@
     height: 100vh;
     .progress {
         padding: 20px;
+        position: relative;
+        span {
+            position: absolute;
+                left: 50%;
+                top: 37px;
+                font-size: 14px;
+        }
         progress {
             width: 100%;
             height: 50px;
@@ -11,7 +18,16 @@
     .sideNav {
         width: 100px;
         height: 100%;
-        background-color: blue;
+        background-color: #1976d2;
+        span {
+            font-size: 40px;
+            font-weight: 600;
+            color: aliceblue;
+            position: relative;
+            left: 20px;
+            top: 5px;
+            padding: 10px;
+        }
     }
     .innerContainer {
         width: calc(100% - 100px);
@@ -19,6 +35,12 @@
     .header {
         height: 60px;
         border-bottom: 1px solid #b4b4b4;
+        display: flex;
+        align-items: center;
+        span {
+            font-size: 25px;
+            margin-left: 20px;
+        }
     }
     .container {
         display: flex;
@@ -59,12 +81,7 @@
             padding: 20px;
             .amount {
                 display: flex;
-                // justify-content: center;
-                // height: 100%;
-                // width: 100%;
                 gap: 40px;
-                // position: relative;
-                // top: 25%;
                 label {
                     display: block;
                 }
