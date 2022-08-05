@@ -47,6 +47,7 @@ export class LayoutComponent implements OnInit {
     year: false,
   };
   time: Observable<string> | null = null;
+  invalidData = false;
 
   constructor(private renderer: Renderer2, private appService: AppService) {}
 
@@ -61,12 +62,8 @@ export class LayoutComponent implements OnInit {
     const dataArray = querySnapshot.forEach(doc => {
       this.billsArrayList.push({ id: doc.id, ...doc.data() });
     });
-    console.log(this.billsArrayList);
     this.currentObject = this.billsArrayList[this.currentIndex];
-    // this.currentArray = this.billsArrayList.slice(this.page * 4, 4);
-    // console.log(this.currentArray);
-    const x = this.billsArrayList.slice(0, 1);
-    console.log(x);
+    console.log(this.currentObject);
   }
 
   onChangeCurrency(event: any) {
@@ -136,12 +133,21 @@ export class LayoutComponent implements OnInit {
 
   nextTask() {
     this.taskIndex++;
-    this.currentObject = this.billsArrayList[this.currentIndex++];
     this.progressValue = PROGRESS_COUNT * this.taskIndex;
+    this.amount = '';
+    this.currency = '';
+    this.month = '';
+    this.year = '';
+    this.date = '';
+    if (this.billsArrayList.length === this.currentIndex) {
+      this.currentIndex = 0;
+    }
     this.currentObject = this.billsArrayList[++this.currentIndex];
+    console.log(this.currentObject);
   }
 
   validateData() {
+    this.invalidData = false;
     if (this.taskIndex === this.taskGroup) {
       this.taskIndex = 1;
       this.progressValue = 25;
@@ -155,11 +161,15 @@ export class LayoutComponent implements OnInit {
         this.currentObject.currency === this.currency
       ) {
         this.nextTask();
+      } else {
+        this.invalidData = true;
       }
     } else if (this.currentObject.type === 'date') {
       const date = this.month + '/' + this.date + '/' + this.year;
       if (this.currentObject.date === date) {
         this.nextTask();
+      } else {
+        this.invalidData = true;
       }
     }
   }

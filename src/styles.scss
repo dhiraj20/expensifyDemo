@@ -57,3 +57,13 @@ select {
     border: 1px solid #102210;
   }
 }
+
+.emptyBox {
+  line-height: 100px;
+  text-align: center;
+}
+
+.invalid {
+  color: rgb(204, 45, 45);
+  font-size: 18px;
+}

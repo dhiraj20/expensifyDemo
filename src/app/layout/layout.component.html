@@ -21,7 +21,7 @@
                         </div>
                     </div>
                     <iframe *ngIf="currentObject.fileType === 'pdf'" [src]="currentObject.url | safe"
-                            style="position: absolute; height: 100%; border: none;width: 95%;"></iframe>
+                        style="position: absolute; height: 100%; border: none;width: 95%;"></iframe>
                 </div>
                 <div class="container_right">
                     <form #layoutForm="ngForm">
@@ -29,16 +29,16 @@
                             <div *ngIf="currentObject.type === 'amount'">
                                 <label>Amount</label>
                                 <input class="width_150" currencyMask [(ngModel)]="amount"
-                                       [options]="{thousands: ',', decimal: '.' }" required name="amount"
-                                       [ngClass]="formError.amount ? 'error': ''" />
+                                    [options]="{thousands: ',', decimal: '.' }" required name="amount"
+                                    [ngClass]="formError.amount ? 'error': ''" />
                             </div>
                             <div *ngIf="currentObject.type === 'amount'">
                                 <label>Currency</label>
                                 <select class="width_150" name="currency" id="currency"
-                                        [ngClass]="formError.currency ? 'error': ''" (change)="onChangeCurrency($event)"
-                                        [(ngModel)]="currency">
+                                    [ngClass]="formError.currency ? 'error': ''" (change)="onChangeCurrency($event)"
+                                    [(ngModel)]="currency">
                                     <option value="currency" *ngFor="let currency of currencyList"
-                                            value="{{currency.cc}}">
+                                        value="{{currency.cc}}">
                                         {{currency.cc}}
                                     </option>
                                 </select>
@@ -51,20 +51,20 @@
                                 <div>
                                     <label>mm</label>
                                     <input type="text" placeholder="mm" (keypress)="keyPress($event)" type="number"
-                                           pattern="[0-9]*" [(ngModel)]="month"
-                                           [ngClass]="formError.month ? 'error': ''" name="month">
+                                        pattern="[0-9]*" [(ngModel)]="month" [ngClass]="formError.month ? 'error': ''"
+                                        name="month">
                                 </div>
                                 <div>
                                     <label>dd</label>
                                     <input type="text" placeholder="dd" (keypress)="keyPress($event)" type="number"
-                                           pattern="[0-9]*" [(ngModel)]="date" [ngClass]="formError.day ? 'error': ''"
-                                           name="day">
+                                        pattern="[0-9]*" [(ngModel)]="date" [ngClass]="formError.day ? 'error': ''"
+                                        name="day">
                                 </div>
                                 <div>
                                     <label>yyyy</label>
                                     <input type="text" placeholder="yyyy" (keypress)="keyPress($event)" type="number"
-                                           pattern="[0-9]*" [(ngModel)]="year" [ngClass]="formError.year ? 'error': ''"
-                                           name="year">
+                                        pattern="[0-9]*" [(ngModel)]="year" [ngClass]="formError.year ? 'error': ''"
+                                        name="year">
                                 </div>
                             </div>
                         </div>
@@ -77,6 +77,7 @@
                         <div class="mt10 row" *ngIf="currentObject.type === 'date'">
                             <input type="checkbox"><label>Date is unclear</label>
                         </div>
+                        <div class="mt10 invalid" *ngIf="invalidData">You have entered invalid data</div>
                         <div class="mt20">
                             <button class="btn" (click)="validateData()">Next</button>
                         </div>
@@ -84,6 +85,9 @@
                 </div>
             </div>
         </div>
-
     </div>
+</div>
+
+<div class="emptyBox" *ngIf="!currentObject">
+    Task Is Empty
 </div>

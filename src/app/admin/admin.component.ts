@@ -67,8 +67,6 @@ export class AdminComponent implements OnInit {
     const dataArray = querySnapshot.forEach(doc => {
       this.billsArray.push(doc.data());
     });
-    console.log(this.billsArray);
-    this.fileDetail.url = this.billsArray[2].url;
   }
 
   onChangeType(event: any) {
