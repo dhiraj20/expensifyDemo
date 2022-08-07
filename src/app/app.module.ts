@@ -14,6 +14,7 @@ import { environment } from 'src/environments/environment';
 import { SafePipe } from './safe.pipe';
 import { ListComponent } from './list/list.component';
 import { AddBillsComponent } from './add-bills/add-bills.component';
+import { LoaderComponent } from './loader/loader.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { AddBillsComponent } from './add-bills/add-bills.component';
     AdminComponent,
     SafePipe,
     ListComponent,
-    AddBillsComponent
+    AddBillsComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
