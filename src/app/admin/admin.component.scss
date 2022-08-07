@@ -1,56 +1,22 @@
-.container {
-  height: 100vh;
-  .division {
-    display: flex;
+nav {
+  padding: 20px;
+  height: 60px;
+  background: #1976d2;
+}
+a {
+  padding: 8px 16px;
+  border-radius: 4px;
+  text-decoration: none;
+  color: aliceblue;
+  font-weight: 400;
+  &:hover {
+    background: rgba(255, 255, 255, 0.15);
   }
-  .image {
-    padding: 20px;
-    overflow: auto;
-    height: 100%;
-    background: gray;
-    img {
-      height: 100%;
-      width: 100%;
-      object-fit: contain;
-    }
-    .leftBtn {
-      position: fixed;
-      top: 110px;
-      left: 40px;
-      z-index: 5;
-    }
-    .rightBtn {
-      position: fixed;
-      top: 110px;
-      left: 50%;
-      z-index: 5;
-    }
-    .zoomBtns {
-      position: fixed;
-      bottom: 5%;
-      left: 30%;
-    }
-  }
-  .left {
-    width: 60%;
-    position: relative;
-    overflow: auto;
-    height: 100vh;
-  }
-  .right {
-    padding: 20px;
-    height: 100vh;
-    width: 40%;
-    border-left: 1px solid #b4b4b4;
-    height: 100vh;
-  }
-  .date {
-    display: flex;
-    gap: 20px;
+  &:active {
+    color: #0c2a48;
   }
 }
 
-.rowCurrency {
-  display: flex;
-  gap: 20px;
+.isActive {
+  background: rgba(255, 255, 255, 0.15);
 }

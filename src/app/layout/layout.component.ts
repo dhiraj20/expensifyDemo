@@ -9,6 +9,7 @@ import { interval, Observable, Observer } from 'rxjs';
 import { getDocs } from 'firebase/firestore';
 import { AppService } from '../app.service';
 import { CURRENCY_LIST } from '../currency';
+import { NgForm } from '@angular/forms';
 
 const PROGRESS_COUNT = 25;
 @Component({
@@ -18,6 +19,7 @@ const PROGRESS_COUNT = 25;
 })
 export class LayoutComponent implements OnInit {
   @ViewChild('inputElement') inputElement: ElementRef;
+  @ViewChild('aForm') aForm: ElementRef;
   current_rotation = 180;
   defaultZoomValue = 1;
   myDecimal = 0.0;
@@ -54,6 +56,13 @@ export class LayoutComponent implements OnInit {
   ngOnInit(): void {
     this.getItems();
     this.showTimer();
+  }
+
+  setFocus(name: any) {
+    const ele = this.aForm.nativeElement[name];
+    if (ele) {
+      ele.focus();
+    }
   }
 
   async getItems() {
@@ -139,10 +148,11 @@ export class LayoutComponent implements OnInit {
     this.month = '';
     this.year = '';
     this.date = '';
-    if (this.billsArrayList.length === this.currentIndex) {
+    if (this.billsArrayList.length - 1 === this.currentIndex) {
       this.currentIndex = 0;
     }
     this.currentObject = this.billsArrayList[++this.currentIndex];
+    this.setFocus('amount');
     console.log(this.currentObject);
   }
 

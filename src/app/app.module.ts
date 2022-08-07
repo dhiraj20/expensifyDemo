@@ -12,6 +12,8 @@ import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { environment } from 'src/environments/environment';
 import { SafePipe } from './safe.pipe';
+import { ListComponent } from './list/list.component';
+import { AddBillsComponent } from './add-bills/add-bills.component';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import { SafePipe } from './safe.pipe';
     AppComponent,
     LayoutComponent,
     AdminComponent,
-    SafePipe
+    SafePipe,
+    ListComponent,
+    AddBillsComponent
   ],
   imports: [
     BrowserModule,

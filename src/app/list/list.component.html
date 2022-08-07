@@ -1,0 +1,9 @@
+<section *ngIf="billsArrayList.length > 0">
+    <div *ngFor="let bill of billsArrayList" class="billContainer">
+        <div>
+            <img *ngIf="bill.fileType === 'image'" [src]="bill.url" alt="image" height="300" width="300">
+            <iframe *ngIf="bill.fileType === 'pdf'" [src]="bill.url | safe"
+                style="height: 300px; border: none;width: 300px;"></iframe>
+        </div>
+    </div>
+</section>
