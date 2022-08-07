@@ -153,21 +153,6 @@ export class AdminComponent implements OnInit {
         .catch(error => {
           console.log('Uh-oh, an error occurred!', error);
         });
-    } finally {
-      this.payload = {
-        type: 'amount',
-        amount: '',
-        currency: this.currencyList[0].cc,
-        date: '',
-        url: '',
-        fileType: '',
-        amountUnclear: false,
-        dateUnclear: false,
-      };
-      this.fileDetail = {
-        type: '',
-        url: '',
-      };
     }
   }
 }
